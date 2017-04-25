@@ -1,0 +1,33 @@
+
+<form method="post" action="/create_question">
+  <h3>Crea una pregunta</h3>
+  <input name="question_user" type="question" placeholder="Crea una pregunta" size="70"><br><br>
+  <input type="submit" value="Crear Pregunta" id="crete_question1">
+</form>
+<hr align="left|center|right">
+<% Question.all.reverse_each do |question| %>  
+  <% user_question = Question.find_by(id: question.id).question_votes %>
+  <% positive_vote = user_question.where(vote: "true") %>
+  <% negative_vote = user_question.where(vote: "false") %> 
+  <a href="/show_question/<%= question.id %>"><%= question.id %>.- <%= question.question_name %></a>
+  <a href="/positive_vote_question/<%= question.id %>" ><button id="sesion1" type="button">voto positivo</button></a>
+  <%= positive_vote.count %>
+  <a href="/negative_vote_question/<%= question.id %>" ><button id="sesion2" type="button">voto negativo</button></a>
+  <%= negative_vote.count %>
+  <% question.answers.each_with_index do |answe, index| %>
+      <% user_answer = Answer.find_by(id: answe.id).answer_votes %>
+      <% positive_votee = user_answer.where(vote: "true") %>
+      <% negative_votee = user_answer.where(vote: "false") %><br> 
+      <%= index +1%>. <%= answe.answer_name %>
+      <a class="answer_vot_positive" href="/positive_vote_answer" value="<%= answe.id %>" ><button id="sesion1" type="button">voto positivo</button></a>
+        <%= positive_votee.count %>
+      <a class="answer_vot_negative" href="/negative_vote_answer" value="<%= answe.id %>" ><button id="sesion2" type="button">voto negativo</button></a>
+        <%= negative_votee.count %>
+  <% end %>
+    <form method="post" action="/add_answer/<%=question.id%>">
+      <input name="question_user" type="question" placeholder="Escribe una Comentario" size="70"><br><br>
+      <input type="submit" value="Enviar Comentario" id="crete_question2">
+    </form>
+     <hr align="left|center|right">
+<% end %>
+     

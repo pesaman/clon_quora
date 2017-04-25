@@ -1,0 +1,22 @@
+<hr align="left|center|right">
+<hr align="left|center|right">
+<h1>Realiza tus cambios!</h1>
+<hr align="left|center|right">
+<hr align="left" width="100%">
+<a href="/home" ><button id="sesion" type="button">Home</button></a>
+<a href="/user_profile" ><button id="sesion" type="button">Mi Perfil</button></a>
+<a href="/my_answers" ><button id="sesion" type="button">Mis Respuestas</button></a>
+<a href="/my_questions" ><button id="sesion" type="button">Mis Preguntas</button></a>
+<a href="/logout" ><button id="sesion" type="button">logaut</button></a><br><br>
+
+  <form class="signin" action="/update_profileee" method="POST">
+    <input type="text" name="username" value="<%= current_user.username %>"><br><br>
+    <input type="text" name="name" value="<%= current_user.name %>"><br><br>
+    <input type="text" name="email" value="<%= current_user.email %>"><br><br>
+    <input type="password" name="password" placeholder="cambia tu password"><br><br>
+    
+    
+    <input type="submit" value="Actualizar" id="continue_s">
+    <a href="/" ><button id="sesion" type="button">Regresar</button></a>
+  </form>
+

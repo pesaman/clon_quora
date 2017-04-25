@@ -1,0 +1,23 @@
+<% @questions.reverse.each_with_index do |question, index|%>
+  <% user_question = Question.find_by(id: question.id).question_votes %>
+  <% positive_vote = user_question.where(vote: "true") %>
+  <% negative_vote = user_question.where(vote: "false") %> 
+  <hr align="left|center|right">
+  <a href="/show_question/<%= question.id %>"><%= index +1%>. -<%= question.question_name %></a>
+  <a class="question_vot_positive" href="/positive_vote_question" value=" <%= question.id %>" ><button id="sesion1" type="button">voto positivo</button></a>
+  <%= positive_vote.count %>
+  <a class="question_vot_negative" href="/negative_vote_question" value=" <%= question.id %>" ><button id="sesion2" type="button">voto negativo</button></a>
+  <%= negative_vote.count %>
+  <% answerss = Question.find_by(id: question.id).answers%>
+  <% answerss.each do |bb| %>
+    <% user_answer = Answer.find_by(id: bb.id).answer_votes %>
+    <% positive_votee = user_answer.where(vote: "true") %>
+    <% negative_votee = user_answer.where(vote: "false") %><br>
+    <%= bb.id %>.-  <%= bb.answer_name %>
+    <a class="answer_vot_positive" href="/positive_vote_answer" value="<%= bb.id %>" ><button id="sesion1" type="button">voto positivo</button></a>
+        <%= positive_votee.count %>
+      <a class="answer_vot_negative" href="/negative_vote_answer" value="<%= bb.id %>" ><button id="sesion2" type="button">voto negativo</button></a>
+        <%= negative_votee.count %>
+  <%end%>
+<%end%>
+  <hr align="left|center|right">

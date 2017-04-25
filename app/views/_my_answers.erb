@@ -1,0 +1,21 @@
+<hr align="left|center|right">
+  <% @answers.each_with_index do |answer, index| %>
+    <% question = Question.find_by(id: answer.question_id)%>
+    <% user_question = Question.find_by(id: question.id).question_votes %>
+    <% positive_vote = user_question.where(vote: "true") %>
+    <% negative_vote = user_question.where(vote: "false") %>
+    <a href="/show_question/<%= question.id %>"><%= index +1 %>.-  <%=  question.question_name %></a>
+    <a class="question_vot_positive" href="/positive_vote_question" value=" <%= question.id %>" ><button id="sesion1" type="button">voto positivo</button></a>
+  <%= positive_vote.count %>
+  <a class="question_vot_negative" href="/negative_vote_question" value=" <%= question.id %>" ><button id="sesion2" type="button">voto negativo</button></a>
+  <%= negative_vote.count %>
+    <% user_answer = Answer.find_by(id: answer.id).answer_votes %>
+    <% positive_votee = user_answer.where(vote: "true") %>
+    <% negative_votee = user_answer.where(vote: "false") %><br>
+    <%= answer.answer_name %>
+    <a class="answer_vot_positive" href="/positive_vote_answer" value="<%= answer.id %>" ><button id="sesion1" type="button">voto positivo</button></a>
+        <%= positive_votee.count %>
+      <a class="answer_vot_negative" href="/negative_vote_answer" value="<%= answer.id %>" ><button id="sesion2" type="button">voto negativo</button></a>
+        <%= negative_votee.count %>
+    <hr align="left|center|right">
+  <% end%>
